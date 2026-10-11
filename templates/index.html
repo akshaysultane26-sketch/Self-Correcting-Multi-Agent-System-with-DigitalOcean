@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Self-Correcting Multi-Agent System</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Self-Correcting Multi-Agent System</h1>
+    <p class="subtitle">Writer &rarr; Reviewer &rarr; Reviser loop powered by LangGraph</p>
+
+    <div class="runtime">
+      {% if runtime.router_enabled %}
+        <span>Inference Router: {{ runtime.router }}</span>
+      {% else %}
+        <span>Writer: {{ runtime.writer_model }}</span>
+        <span>Reviewer: {{ runtime.reviewer_model }}</span>
+        <span>Reviser: {{ runtime.reviser_model }}</span>
+      {% endif %}
+      <span>Max revisions: {{ runtime.max_revisions }}</span>
+    </div>
+
+    <div class="input-row">
+      <input id="topic" type="text" maxlength="300" value="{{ example_topic }}"
+             placeholder="Enter a topic, e.g. What is an AI agent?">
+      <button id="run-btn">Run agents</button>
+    </div>
+
+    <div id="status" class="status"></div>
+
+    <section id="results" class="hidden">
+      <h2>Execution trace</h2>
+      <div id="trace"></div>
+
+      <h2>Final answer</h2>
+      <div id="summary" class="summary"></div>
+      <div id="final" class="card final"></div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
